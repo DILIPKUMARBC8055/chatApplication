@@ -9,12 +9,15 @@ import connectToMongo from "./config/mongoose.config.js"; // Import MongoDB conn
 import UserModel from "./src/features/user/user.schema.js"; // Import User model/schema
 import chatModel from "./src/features/chat/chat.schema.js"; // Import Chat model/schema
 
+import path from "path";
 const app = express();
-const server = http.createServer(app);
 
+app.get("/", (req, res) => {
+  res.sendFile(path.join(path.resolve(), "index.html"));
+});
 // Set up CORS middleware
 app.use(cors());
-
+const server = http.createServer(app);
 // Create Socket.IO server instance
 const io = new Server(server, {
   cors: {
